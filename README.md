@@ -5,9 +5,12 @@ Running a Parse Server that uploads files to S3, and don't need them preprocesse
 Wouldn't it be great if you could send them directly to S3, bypassing your server
 and dropping its load considerably? 
 
-Now you can! (Well, at least on iOS so far.)
+Now you can! (Well, at least on iOS so far.) 
 
-To do so, you'll need to perform a few steps:
+What this project does is provide code for your server to offer up short term S3 write credentials to your client,
+and a pluggable controller for PFFile uploading that requests those credentials, then submits directly to S3 with them.
+
+To use it, you'll need to perform a few steps:
 
 1. Configure your S3 account for Secure Token Service (STS).
 2. Create a cloud function on your Parse server that respond with an sts token and bucket information, 
