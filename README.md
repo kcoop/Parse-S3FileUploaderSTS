@@ -7,15 +7,16 @@ and dropping its load considerably?
 
 Now you can! (Well, at least on iOS so far.)
 
-To do so, you'll need to follow a few steps:
-1. Configure your S3 account for Secure Token Service (STS)*.
+To do so, you'll need to perform a few steps:
+
+1. Configure your S3 account for Secure Token Service (STS).
 2. Create a cloud function on your Parse server that respond with an sts token and bucket information, 
 using supplied code and a few environment settings.
 3. Add a custom PFFileUploaderController to your Parse configuration at startup on your iOS client.
 
-*The code contained here uses STS as a simple solution similar to what Parse Server offers. 
+*Note: The code in this project uses STS as a simple solution similar to what Parse Server offers. 
 Amazon also offers Cognito-based credentials, which could be implemented in a similar fashion, if you
-need user-level access control.
+need user-level access control.*
 
 ## Configure STS
 
@@ -26,9 +27,9 @@ TODO - describe the role, group, user, and policies for this. There are guides o
 1. Add the file server/aws-sts.js to your server, and register it as a cloud function 
 like so:
 
-```javascript
-Parse.Cloud.define("uploadsts", require('./aws-sts.js'));
-```
+    ```javascript
+    Parse.Cloud.define("uploadsts", require('./aws-sts.js'));
+    ```
 
 2. Define the following environment variables, many of which will already
 be defined if you've been using the parse-server S3 adapter. 
@@ -50,19 +51,19 @@ be defined if you've been using the parse-server S3 adapter.
 
 **Objective C**
 
-```objective-c
-
-    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        ...
-        configuration.fileUploadController = [[PFFileS3UploaderController alloc]init];
-    }]];
- ```
+    ```objective-c
+    
+        [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+            ...
+            configuration.fileUploadController = [[PFFileS3UploaderController alloc]init];
+        }]];
+     ```
  
 **or Swift:**
  
- ```swift
-let configuration = ParseClientConfiguration {
-    ...
-    $0.fileUploadController = PFFileS3UploadController()
-}
-```
+     ```swift
+    let configuration = ParseClientConfiguration {
+        ...
+        $0.fileUploadController = PFFileS3UploadController()
+    }
+    ```
