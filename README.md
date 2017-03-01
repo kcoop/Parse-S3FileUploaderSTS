@@ -7,19 +7,19 @@ and dropping its load considerably?
 
 Now you can! (Well, at least on iOS so far.) 
 
-What this project does is provide code for your server to offer up short term S3 write credentials to your client,
-and a pluggable controller for PFFile uploading that requests those credentials, then submits directly to S3 with them.
+This project provides code for your server to offer up short term S3 write credentials to your client,
+and a pluggable client controller for PFFile uploading that requests those credentials, then submits directly to S3 with them.
 
 To use it, you'll need to perform a few steps:
 
 1. Configure your S3 account for Secure Token Service (STS).
-2. Create a cloud function on your Parse server that respond with an sts token and bucket information, 
+2. Create a cloud function on your Parse server that responds with an STS token and bucket information, 
 using supplied code and a few environment settings.
 3. Add a custom PFFileUploaderController to your Parse configuration at startup on your iOS client.
 
 *Note: The code in this project uses STS as a simple solution similar to what Parse Server offers. 
-Amazon also offers Cognito-based credentials, which could be implemented in a similar fashion, if you
-need user-level access control.*
+Amazon also offers Cognito-based credentials, which could be implemented in a similar fashion if you
+need user-level access control and more flexibility. Be aware Amazon charges for Cognito.*
 
 ## Configure STS
 
@@ -44,12 +44,13 @@ be defined if you've been using the parse-server S3 adapter.
 - S3_BUCKET - the bucket you're writing to.
 - S3_BASE_URL - the base URL of your files (Your URLs will be S3_BASE_URL/S3_BUCKET/filename).
 
-3. If you haven't already been using the AWS, you'll need to include the aws-sdk as a dependency.
+3. If you haven't already been using the AWS SDK, you'll need to include the aws-sdk as a dependency in your package.json. 
+(This is already a dependency in parse-server-s3-adapter.)
 
 ## Add and register PFFileS3UploadController
 
-1. Add the files in the iOS directory to your project.
-2. Include the AWS SDK as a dependency, in whatever form suits you.
+1. Add the files from the iOS directory to your project.
+2. Add the AWS SDK as a dependency, in whatever form suits you.
 3. Add the following line to your Parse initialization:
 
 **Objective C**
