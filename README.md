@@ -44,9 +44,6 @@ be defined if you've been using the parse-server S3 adapter.
 - S3_BUCKET - the bucket you're writing to.
 - S3_BASE_URL - the base URL of your files (Your URLs will be S3_BASE_URL/S3_BUCKET/filename).
 
-3. If you haven't already been using the AWS SDK, you'll need to include the aws-sdk as a dependency in your package.json. 
-(This is already a dependency in parse-server-s3-adapter.)
-
 ## Add and register PFFileS3UploadController
 
 1. Add the files from the iOS directory to your project.
